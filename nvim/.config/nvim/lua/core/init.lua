@@ -11,6 +11,7 @@ opt.signcolumn = "yes"      -- reserve the gutter so diagnostics don't shift tex
 opt.scrolloff = 8           -- keep 8 lines visible above/below the cursor
 opt.sidescrolloff = 8
 opt.termguicolors = true
+opt.mouse = ""              -- no mouse anywhere; force keyboard-only motions
 
 -- Indentation: Google C++ default (2 sp). Python (4 sp) and Go (tabs)
 -- are handled per-project via .editorconfig in a later module.
