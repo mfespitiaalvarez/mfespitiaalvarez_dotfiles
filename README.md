@@ -46,6 +46,37 @@ Why each:
 
 If `apt`'s `neovim` is older than 0.10, grab the AppImage or PPA — Mason and treesitter need it.
 
+### Plus: tree-sitter CLI (not an apt package)
+
+`nvim-treesitter` is pinned to its `main` branch, which requires the external `tree-sitter` binary at build time. Install via npm:
+
+```bash
+sudo npm install -g tree-sitter-cli
+```
+
+No-sudo alternative (user-prefix npm):
+
+```bash
+mkdir -p ~/.npm-global && npm config set prefix ~/.npm-global
+echo 'export PATH=$HOME/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+npm install -g tree-sitter-cli
+```
+
+Verify with `tree-sitter --version` from a fresh shell, then run `:TSUpdate` in nvim.
+
+**If npm install gives `GLIBC_2.XX not found`** (common on older Debian / enterprise Linux like gLinux), the npm prebuilt binary is too new for the system glibc. Build from source via cargo instead:
+
+```bash
+# install rust toolchain if needed
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source ~/.cargo/env
+
+npm uninstall -g tree-sitter-cli   # remove the broken npm one
+cargo install tree-sitter-cli       # builds against local glibc; takes a few min
+tree-sitter --version
+```
+
 ## Install on a new machine
 
 ```bash
